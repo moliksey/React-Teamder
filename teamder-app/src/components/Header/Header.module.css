@@ -1,0 +1,28 @@
+.header {
+    background-color: black;
+    color: white;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
+    grid-gap: 10px;
+
+}
+
+.content {
+    padding-top: 20px;
+
+}
+
+.content a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+a.active {
+    background-color: dimgrey;
+}
+
+.header img {
+    height: 60px;
+}
