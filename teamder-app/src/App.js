@@ -1,13 +1,12 @@
 import './App.css';
 import Header from "./components/Header/Header";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Register from "./components/register/register";
+import Authentication from "./components/Authentication/authentication";
 function App() {
   return (
 
         <div className="App">
          <Header />
-            <Register />
+            <Authentication />
         </div>
 
   );

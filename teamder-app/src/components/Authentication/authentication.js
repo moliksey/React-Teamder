@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import validator from 'validator';
 import { DOMEN_SERVER, DOMEN_SITE } from '../../config/const';
 
 
-export default function Register () {
-    const [register, setRegister] = useState(() => {
+export default function Authentication () {
+    const [auth, setAuth] = useState(() => {
         return {
             username: "",
             password: "",
-            password2: "",
         }
     })
 
-    const changeInputRegister = event => {
+    const changeInputAuth = event => {
         event.persist()
-        setRegister(prev => {
+        setAuth(prev => {
             return {
                 ...prev,
                 [event.target.name]: event.target.value,
@@ -26,21 +24,22 @@ export default function Register () {
 
     const submitChackin = event => {
         event.preventDefault();
-        if(!register.username) {
+        if(!auth.username) {
             alert("You did not enter nickname")
-        } else if(register.password !== register.password2) {
-            alert("Repeated password incorrectly")
-        } else if(!validator.isStrongPassword(register.password, {minSymbols: 0})) {
-            alert("Password must consist of one lowercase, uppercase letter and number, at least 8 characters")
+        } else if(!auth.password) {
+            alert("You did not enter password")
         } else {
-            axios.post(DOMEN_SERVER + "/users", {
-                username: register.username,
-                password: register.password,
+            axios.post(DOMEN_SERVER + "/login", {
+                username: auth.username,
+                password: auth.password,
             }).then(res => {
                 if (res.data) {
                     window.location.href = DOMEN_SITE + "/"
+                    if(res.data.token)
+                    localStorage.setItem('token', res.data.token);
+                    else alert("There are no token")
                 } else {
-                    alert("There is already a user with this nickname")
+                    alert("You entered the wrong password or nickname")
                 }
             }).catch(() => {
                 alert("An error occurred on the server")
@@ -54,22 +53,15 @@ export default function Register () {
                 type="username"
                 id="username"
                 name="username"
-                value={register.usernamr}
-                onChange={changeInputRegister}
+                value={auth.username}
+                onChange={changeInputAuth}
             /></p>
             <p>Password: <input
                 type="password"
                 id="password"
                 name="password"
-                value={register.password}
-                onChange={changeInputRegister}
-            /></p>
-            <p>Repeat password: <input
-                type="password"
-                id="password2"
-                name="password2"
-                value={register.password2}
-                onChange={changeInputRegister}
+                value={auth.password}
+                onChange={changeInputAuth}
             /></p>
             <input type="submit"/>
         </form>
