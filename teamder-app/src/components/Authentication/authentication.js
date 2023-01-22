@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import {DOMEN_SERVER, DOMEN_SITE} from '../../config/const';
-import {Typography} from "@mui/material";
-import styled from "@emotion/styled";
 import {Input} from "../Input";
 import {PrimaryButton} from "../PrimaryButton";
 import {MainContainer} from "../MainContainer";
@@ -10,16 +8,7 @@ import {Form} from "../Form";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from 'yup';
-
-const Heading = styled(Typography)`
-  margin-top: 10px;
-  margin-bottom: 5px;
-  font-family: "Permanent Marker";
-  text-align: center;
-  font-size: 40px;
-  color: deeppink;
-  text-shadow: 1px 1px darkmagenta;
-`;
+import {Heading} from "../Heading";
 
 const schema = yup.object().shape({
     username: yup
@@ -57,11 +46,7 @@ export default function Authentication() {
 
     const submitCheckIn = event => {
         event.preventDefault();
-        if (!auth.username) {
-            alert("You did not enter nickname")
-        } else if (!auth.password) {
-            alert("You did not enter password")
-        } else {
+        if (auth.username && auth.password) {
             axios.post(DOMEN_SERVER + "/login", {
                 username: auth.username,
                 password: auth.password,
