@@ -3,7 +3,6 @@ import axios from 'axios';
 import validator from 'validator';
 import { DOMEN_SERVER, DOMEN_SITE } from '../../config/const';
 
-
 export default function Register () {
     const [register, setRegister] = useState(() => {
         return {
