@@ -1,9 +1,42 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import { DOMEN_SERVER, DOMEN_SITE } from '../../config/const';
+import {DOMEN_SERVER, DOMEN_SITE} from '../../config/const';
+import {Typography} from "@mui/material";
+import styled from "@emotion/styled";
+import {Input} from "../Input";
+import {PrimaryButton} from "../PrimaryButton";
+import {MainContainer} from "../MainContainer";
+import {Form} from "../Form";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import * as yup from 'yup';
+
+const Heading = styled(Typography)`
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-family: "Permanent Marker";
+  text-align: center;
+  font-size: 40px;
+  color: deeppink;
+  text-shadow: 1px 1px darkmagenta;
+`;
+
+const schema = yup.object().shape({
+    username: yup
+        .string()
+        .required('Enter your username'),
+    password: yup
+        .string()
+        .required('Enter the password'),
+});
 
 
-export default function Authentication () {
+export default function Authentication() {
+    const {register, handleSubmit, formState: {errors}} = useForm({
+        mode: 'onBlur',
+        resolver: yupResolver(schema)
+    });
+
     const [auth, setAuth] = useState(() => {
         return {
             username: "",
@@ -22,11 +55,11 @@ export default function Authentication () {
     }
 
 
-    const submitChackin = event => {
+    const submitCheckIn = event => {
         event.preventDefault();
-        if(!auth.username) {
+        if (!auth.username) {
             alert("You did not enter nickname")
-        } else if(!auth.password) {
+        } else if (!auth.password) {
             alert("You did not enter password")
         } else {
             axios.post(DOMEN_SERVER + "/login", {
@@ -35,8 +68,8 @@ export default function Authentication () {
             }).then(res => {
                 if (res.data) {
                     window.location.href = DOMEN_SITE + "/"
-                    if(res.data.token)
-                    localStorage.setItem('token', res.data.token);
+                    if (res.data.token)
+                        localStorage.setItem('token', res.data.token);
                     else alert("There are no token")
                 } else {
                     alert("You entered the wrong password or nickname")
@@ -46,24 +79,32 @@ export default function Authentication () {
             })
         }
     }
-    return(<div className="form">
-        <h2>Register user:</h2>
-        <form onSubmit={submitChackin}>
-            <p>Name: <input
+    return (<MainContainer>
+        <Heading>Authorization:</Heading>
+        <Form onSubmit={submitCheckIn}>
+            <Input
+                {...register('username')}
                 type="username"
                 id="username"
                 name="username"
                 value={auth.username}
                 onChange={changeInputAuth}
-            /></p>
-            <p>Password: <input
+                label="Login"
+                error={!!errors.username}
+                helperText={errors?.username?.message}
+            />
+            <Input
+                {...register('password')}
                 type="password"
                 id="password"
                 name="password"
                 value={auth.password}
                 onChange={changeInputAuth}
-            /></p>
-            <input type="submit"/>
-        </form>
-    </div>);
+                label="Password"
+                error={!!errors.password}
+                helperText={errors?.password?.message}
+            />
+            <PrimaryButton type="submit">Login</PrimaryButton>
+        </Form>
+    </MainContainer>);
 }
