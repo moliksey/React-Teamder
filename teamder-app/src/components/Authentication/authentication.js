@@ -34,7 +34,8 @@ export default function Authentication () {
                 password: auth.password,
             }).then(res => {
                 if (res.data) {
-                    window.location.href = DOMEN_SITE + "/"
+                   // window.location.href = DOMEN_SITE + "/"
+                    localStorage.removeItem('token');
                     if(res.data.token)
                     localStorage.setItem('token', res.data.token);
                     else alert("There are no token")

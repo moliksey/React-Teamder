@@ -1,0 +1,31 @@
+.img {
+    position: relative;
+
+    height: 100%;
+    aspect-ratio: auto;
+    float: left;
+
+
+}
+
+.imgContainer {
+    position: relative;
+    height: 100%;
+    aspect-ratio: auto;
+    float: left;
+    width: 60%;
+}
+
+.like {
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+
+}
+
+.MainPost {
+
+    padding: 10px;
+    margin-bottom: 10px;
+
+}
