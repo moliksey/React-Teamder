@@ -11,6 +11,7 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import * as yup from "yup";
 import YupPassword from "yup-password";
+import {useNavigate} from "react-router-dom";
 
 YupPassword(yup);
 
@@ -29,6 +30,7 @@ const schema = yup.object().shape({
 });
 
 export default function Register () {
+    const navigate = useNavigate();
     const {register, handleSubmit, formState: {errors}} = useForm({
         mode: 'onBlur',
         resolver: yupResolver(schema)
@@ -64,7 +66,7 @@ export default function Register () {
                 password: reg.password,
             }).then(res => {
                 if (res.data) {
-                    window.location.href = DOMEN_SITE + "/"
+                    navigate('/mainPage')
                 } else {
                     alert("There is already a user with this nickname")
                 }

@@ -79,8 +79,8 @@ function Header() {
                     </ul>
                     <DropdownButton id="dropdown-basic-button" variant="light" title={user}
                                     style={{display: isLoggedIn ? 'inline-block' : 'none'}}>
-                        <Dropdown.Item href="#/action-1" onClick={nav1}>My ads</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2" onClick={nav2}>My dialogs</Dropdown.Item>
+                        <Dropdown.Item  onClick={nav1}>My ads</Dropdown.Item>
+                        <Dropdown.Item  onClick={nav2}>My dialogs</Dropdown.Item>
                         <Dropdown.Item  onClick={nav3}>My page</Dropdown.Item>
                         <Dropdown.Item href="#/action-4" onClick={logOut}>Log out</Dropdown.Item>
                     </DropdownButton>

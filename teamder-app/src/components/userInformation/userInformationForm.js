@@ -92,13 +92,13 @@ import {Routes, Route, useParams, useNavigate} from 'react-router-dom';
 
         <Form onSubmit={submitChackin}>
             <Form.Group className="mb-3" style={{display: 'inline-block', width: '30%', marginRight: '2px'}}>
-                <Form.Label>Ваше эло</Form.Label>
+                <Form.Label>Имя</Form.Label>
                 <Form.Control type="text" id="name" name="name" placeholder="Enter name" value={userInfo.name}
                               style={{margin: '5px'}}
                               onChange={changeInputAuth}/>
             </Form.Group>
             <Form.Group className="mb-3" style={{display: 'inline-block', width: '30%', marginLeft: '2px'}}>
-                <Form.Label>Ваш гендер</Form.Label>
+                <Form.Label>Фамилия</Form.Label>
                 <Form.Control type="text" id="surname" name="surname" placeholder="Enter your surname" value={userInfo.surname}
                               style={{margin: '5px'}}
                               onChange={changeInputAuth}/>
@@ -111,7 +111,7 @@ import {Routes, Route, useParams, useNavigate} from 'react-router-dom';
                               onChange={changeInputAuth}/>
             </Form.Group>
             <Form.Group className="mb-3" style={{display: 'inline-block', width: '30%', marginLeft: '2px'}}>
-                <Form.Label>Ваш гендер</Form.Label>
+                <Form.Label>Дата рождения</Form.Label>
                 <Form.Control type="date" id="birthdate" name="birthdate" placeholder="Enter your birthdate" value={userInfo.birthdate}
                               style={{margin: '5px'}}
                               onChange={changeInputAuth}/>
@@ -119,25 +119,25 @@ import {Routes, Route, useParams, useNavigate} from 'react-router-dom';
             <div/>
 
             <Form.Group className="mb-3" style={{display: 'inline-block', width: '60%'}}>
-                <Form.Label>Tag</Form.Label>
+                <Form.Label>Discord</Form.Label>
                 <Form.Control type="text" id="discord" name="discord" placeholder="Enter your discord"
                               value={userInfo.discord} style={{margin: '5px', width: '100%'}}
                               onChange={changeInputAuth}/>
             </Form.Group>
             <Form.Group className="mb-3" style={{display: 'inline-block', width: '60%'}}>
-                <Form.Label>Tag</Form.Label>
+                <Form.Label>Steam</Form.Label>
                 <Form.Control type="text" id="steam" name="steam" placeholder="Enter your steam"
                               value={userInfo.steam} style={{margin: '5px', width: '100%'}}
                               onChange={changeInputAuth}/>
             </Form.Group>
             <Form.Group className="mb-3" style={{display: 'inline-block', width: '60%'}}>
-                <Form.Label>Tag</Form.Label>
+                <Form.Label>Vk</Form.Label>
                 <Form.Control type="text" id="vk" name="vk" placeholder="Enter your vk"
                               value={userInfo.vk} style={{margin: '5px', width: '100%'}}
                               onChange={changeInputAuth}/>
             </Form.Group>
             <Form.Group className="mb-3" style={{display: 'inline-block', width: '60%'}}>
-                <Form.Label>Tag</Form.Label>
+                <Form.Label>Email</Form.Label>
                 <Form.Control type="text" id="email" name="email" placeholder="Enter your email"
                               value={userInfo.email} style={{margin: '5px', width: '100%'}}
                               onChange={changeInputAuth}/>

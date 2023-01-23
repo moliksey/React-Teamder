@@ -95,10 +95,10 @@ function UserInformationForm() {
                 <Accordion>
                     <Accordion.Item eventKey="0">
                         <Accordion.Body>
-                            <div>Стим: {userInfo.steam}</div>
-                            <div>Дискорд: {userInfo.discord}</div>
-                            <div>Вк {userInfo.vk}</div>
-                            <div>Email {userInfo.email}</div>
+                            <div style={{display: userInfo.steam==null? 'none':'inline-block'}}>Стим: {userInfo.steam}</div><div/>
+                            <div style={{display: userInfo.discord==null? 'none':'inline-block'}}>Дискорд: {userInfo.discord}</div><div/>
+                            <div style={{display: userInfo.vk==null? 'none':'inline-block'}}>Вк {userInfo.vk}</div><div/>
+                            <div style={{display: userInfo.email==null? 'none':'inline-block'}}>Email {userInfo.email}</div><div/>
                         </Accordion.Body>
                         <Accordion.Header>Show more</Accordion.Header>
                     </Accordion.Item>

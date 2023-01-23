@@ -9,7 +9,9 @@ import {useNavigate} from "react-router-dom";
 const Ad = (props) => {
     const navigate = useNavigate();
     const goToUser=event=> {
+        if(props.post.userId!="")
         navigate('/you/'+props.post.userId)
+
     }
     return (
         <div className={style.MainPost}>
@@ -24,9 +26,8 @@ const Ad = (props) => {
                     <Accordion>
                         <Accordion.Item eventKey="0">
                             <Accordion.Body>
-                                <div>Мое эло: {props.post.ad.elo}</div>
-                                <div>Я : {props.post.ad.gender}</div>
-                                <div>Возраст от {props.post.ad.low_age_lvl} - до {props.post.ad.high_age_lvl}</div>
+                                <div><div style={{display: props.post.ad.elo!=''? 'inline-block':'none'}}>Мое эло: {props.post.ad.elo}</div> <div style={{display: props.post.ad.gender!=''? 'inline-block':'none'}}>Я : {props.post.ad.gender}</div></div>
+                                <div style={{display: props.post.ad.low_age_lv==null && props.post.ad.high_age_lvl==null ? 'none':'inline-block'}}>Возраст от {props.post.ad.low_age_lvl} - до {props.post.ad.high_age_lvl}</div>
                                 <div>Цель игры: {props.post.ad.goal_id}</div>
                                 <div>{props.post.ad.game_id}</div>
                                 </Accordion.Body>
