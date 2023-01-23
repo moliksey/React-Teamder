@@ -4,9 +4,12 @@ import {DOMEN_SERVER, DOMEN_SITE} from '../../config/const';
 import Form from 'react-bootstrap/Form';
 import {Button} from "react-bootstrap";
 import Ad from "./ad/ad";
-
+import {Routes, Route, useParams, useNavigate} from 'react-router-dom';
 export default function UpdateAd() {
     //elo, gender, high_age_lvl, is_active, low_age_lvl, tag, text, user_id, game_id, goal_id
+    const navigate = useNavigate();
+    const params = useParams();
+    let adId=params.id;
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
     const [ad, setAd] = useState(() => {
         return {
@@ -50,7 +53,7 @@ export default function UpdateAd() {
                 alert("An error occurred on the server")
             })
         if(ad.game_id==""){
-            let adId=localStorage.getItem('updatingAd')
+            console.log("adId")
             axios.get(DOMEN_SERVER + "/ad/"+adId).then(res => {
                 console.log(res.data)
                 if (res.data) {
@@ -117,7 +120,6 @@ export default function UpdateAd() {
     }
     const submitChackin = event => {
         event.preventDefault();
-        console.log(ad)
         if (!ad.goal_id) {
             alert("You did not enter goal")
         } else if (!ad.game_id) {
@@ -138,7 +140,7 @@ export default function UpdateAd() {
                 goal_id: ad.goal_id,
             }).then(res => {
                 if (res.data) {
-                    window.location.href = DOMEN_SITE + "/";
+                    navigate("/myAds");
                 } else {
                     alert("Something went wrong")
                 }
@@ -207,7 +209,7 @@ export default function UpdateAd() {
                               onChange={changeInputAuth}/>
             </Form.Group>
             <div/>
-            <Button type="submit">Submit form</Button>
+            <Button type="submit">Обновить объявление</Button>
         </Form>
     </div>);
 }

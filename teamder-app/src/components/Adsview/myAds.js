@@ -4,8 +4,14 @@ import {DOMEN_SERVER, DOMEN_SITE} from '../../config/const';
 import Ad from "./ad/ad";
 import {Button} from "react-bootstrap";
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import {useNavigate} from "react-router-dom";
 
 export default function MyAds() {
+    const navigate = useNavigate();
+    const nav = event => {
+        event.persist()
+        navigate("/addAd");
+    }
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
     const [ads, setAds]=useState([]);
     const [isEffect, setEffect]=useState(true);
@@ -26,17 +32,15 @@ export default function MyAds() {
             })
     }});
     const updateAdvert= event => {
-        if(localStorage.getItem('updatingAd'))
-            localStorage.removeItem('updatingAd')
-        localStorage.setItem('updatingAd', event.target.value);
-        //window.location.href = DOMEN_SITE + "/"
-        console.log(localStorage.getItem('updatingAd'));
+
+        navigate('/updateAd/'+event.target.value)
+
     }
     const deleteAd=event=>{
         axios.delete(DOMEN_SERVER + "/ad/"+event.target.value).then(res => {
             if (res.data) {
                 if (res.data) {
-                    window.location.href = DOMEN_SITE + "/"
+                    navigate("/myAds");
                 }
                 else alert("There are no Ads")
             } else {
@@ -58,7 +62,7 @@ export default function MyAds() {
                 {posts}
             </div>
             <h2>Больше объявлений нет</h2>
-            <Button variant="primary">Добавить</Button>
+            <Button variant="primary" onClick={nav}>Добавить</Button>
         </div>
     )
 }

@@ -4,10 +4,12 @@ import {DOMEN_SERVER, DOMEN_SITE} from '../../config/const';
 import Form from 'react-bootstrap/Form';
 import {Button} from "react-bootstrap";
 import Ad from "./ad/ad";
+import {useNavigate} from "react-router-dom";
 
 export default function AddAd() {
     //elo, gender, high_age_lvl, is_active, low_age_lvl, tag, text, user_id, game_id, goal_id
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+    const navigate = useNavigate();
     const [ad, setAd] = useState(() => {
         return {
             elo: "",
@@ -84,7 +86,7 @@ export default function AddAd() {
                 goal_id: ad.goal_id,
             }).then(res => {
                 if (res.data) {
-                    window.location.href = DOMEN_SITE + "/";
+                    navigate("/myAds")
                 } else {
                     alert("Something went wrong")
                 }

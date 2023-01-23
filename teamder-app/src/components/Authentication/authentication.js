@@ -1,31 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import {DOMEN_SERVER, DOMEN_SITE} from '../../config/const';
-import {Input} from "../Input";
-import {PrimaryButton} from "../PrimaryButton";
-import {MainContainer} from "../MainContainer";
-import {Form} from "../Form";
-import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-import * as yup from 'yup';
-import {Heading} from "../Heading";
-
-const schema = yup.object().shape({
-    username: yup
-        .string()
-        .required('Enter your username'),
-    password: yup
-        .string()
-        .required('Enter the password'),
-});
+import { DOMEN_SERVER, DOMEN_SITE } from '../../config/const';
+import { useNavigate } from "react-router-dom";
 
 
-export default function Authentication() {
-    const {register, handleSubmit, formState: {errors}} = useForm({
-        mode: 'onBlur',
-        resolver: yupResolver(schema)
-    });
-
+export default function Authentication () {
+    const navigate=useNavigate();
     const [auth, setAuth] = useState(() => {
         return {
             username: "",
@@ -44,17 +24,23 @@ export default function Authentication() {
     }
 
 
-    const submitCheckIn = event => {
+    const submitChackin = event => {
         event.preventDefault();
-        if (auth.username && auth.password) {
+        if(!auth.username) {
+            alert("You did not enter nickname")
+        } else if(!auth.password) {
+            alert("You did not enter password")
+        } else {
             axios.post(DOMEN_SERVER + "/login", {
                 username: auth.username,
                 password: auth.password,
             }).then(res => {
                 if (res.data) {
-                    window.location.href = DOMEN_SITE + "/"
-                    if (res.data.token)
-                        localStorage.setItem('token', res.data.token);
+                   // window.location.href = DOMEN_SITE + "/"
+                    localStorage.removeItem('token');
+                    if(res.data.token){
+                        navigate("/mainPage");
+                    localStorage.setItem('token', res.data.token);}
                     else alert("There are no token")
                 } else {
                     alert("You entered the wrong password or nickname")
@@ -64,32 +50,24 @@ export default function Authentication() {
             })
         }
     }
-    return (<MainContainer>
-        <Heading>Authorization:</Heading>
-        <Form onSubmit={submitCheckIn}>
-            <Input
-                {...register('username')}
+    return(<div className="form">
+        <h2>Register user:</h2>
+        <form onSubmit={submitChackin}>
+            <p>Name: <input
                 type="username"
                 id="username"
                 name="username"
                 value={auth.username}
                 onChange={changeInputAuth}
-                label="Login"
-                error={!!errors.username}
-                helperText={errors?.username?.message}
-            />
-            <Input
-                {...register('password')}
+            /></p>
+            <p>Password: <input
                 type="password"
                 id="password"
                 name="password"
                 value={auth.password}
                 onChange={changeInputAuth}
-                label="Password"
-                error={!!errors.password}
-                helperText={errors?.password?.message}
-            />
-            <PrimaryButton type="submit">Login</PrimaryButton>
-        </Form>
-    </MainContainer>);
+            /></p>
+            <input type="submit"/>
+        </form>
+    </div>);
 }
