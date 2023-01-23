@@ -85,11 +85,11 @@ function Header() {
                         <Dropdown.Item href="#/action-4" onClick={logOut}>Log out</Dropdown.Item>
                     </DropdownButton>
                     <div style={{display: isLoggedIn ? 'none' : 'inline-block'}}>
-                        <NavLink to={"/auth"}><Button
+                        <NavLink to={"/auth"} style={{textDecoration:"none"}}><Button
                             collor="inherit" variant="outlined"
                             style={{color: 'white', borderColor: "white", margin: '5px'}}>Log in</Button></NavLink>
 
-                        <NavLink to={"/reg"}><Button
+                        <NavLink to={"/reg"} style={{textDecoration:"none"}}><Button
                             color="secondary" variant="contained">Sign up</Button></NavLink>
                     </div>
                 </Toolbar>

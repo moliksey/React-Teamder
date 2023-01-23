@@ -40,7 +40,14 @@ export default function MyAds() {
         axios.delete(DOMEN_SERVER + "/ad/"+event.target.value).then(res => {
             if (res.data) {
                 if (res.data) {
-                    navigate("/myAds");
+                    let i;
+                    let ans=[];
+                    for(i=0; i<ads.length ;i++)
+                    {
+                        if(ads[i].ad.id!=event.target.value)
+                            ans.push(ads[i])
+                    }
+                    setAds(ans);
                 }
                 else alert("There are no Ads")
             } else {
@@ -49,11 +56,24 @@ export default function MyAds() {
         }).catch(() => {
             alert("An error occurred on the server")
         })
+        axios.get(DOMEN_SERVER + "/myAd").then(res => {
+            if (res.data) {
+                if (res.data) {
+                    setAds([...res.data]);
+                }
+                else alert("There are no Ads")
+            } else {
+                alert("There are no Ads")
+            }
+        }).catch(() => {
+            alert("An error occurred on the server")
+        })
+
     }
 
     let posts=ads.map(el=><div><Ad post={el}/> <ButtonGroup aria-label="Basic example">
-        <Button variant="info" value={el.id} onClick={updateAdvert}>Update</Button>
-        <Button variant="danger" value={el.id} onClick={deleteAd}>Delete</Button>
+        <Button variant="info" value={el.ad.id} onClick={updateAdvert}>Update</Button>
+        <Button variant="danger" value={el.ad.id} onClick={deleteAd}>Delete</Button>
     </ButtonGroup> </div>)
 
     return (

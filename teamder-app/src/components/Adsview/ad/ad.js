@@ -11,7 +11,6 @@ const Ad = (props) => {
     const goToUser=event=> {
         navigate('/you/'+props.post.userId)
     }
-    console.log(props.post.ad.elo.length)
     return (
         <div className={style.MainPost}>
             <Card className="text-center">
