@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap");
+
+.menuButton {
+    margin-right: 8px;
+}
+
+.title {
+    flex-grow: 1;
+}
+
+ul {
+    margin: 0;
+    margin-left: 10px;
+    display: flex;
+    padding: 0;
+    padding-left: 10px;
+    list-style-type: none;
+    flex-grow: 1;
+}
+
+li a {
+    flex-grow: 1;
+    font-family: "Permanent Marker";
+    text-decoration: none;
+    padding: 20px;
+    display: flex;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+li a:hover {
+    background: rgba(4,4,4,0.3);
+}

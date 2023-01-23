@@ -8,8 +8,7 @@ function App() {
 
         <div className="App">
             <Header/>
-            <Authentication/>
-            <Register/>
+            <img src=""></img>
         </div>
 
     );
