@@ -10,7 +10,7 @@ import {DOMEN_SERVER} from "../../config/const";
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const SimpleHeader = styled(AppBar)`
-  background-color: darkmagenta;
+  background-color: #810081;
 `
 
 const LogoImage = styled(Image)`
