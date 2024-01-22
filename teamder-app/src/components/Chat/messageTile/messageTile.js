@@ -29,7 +29,6 @@ const MessageTile = (props) => {
 
                         <Dropdown.Menu >
                             <Dropdown.Item onClick={deleteMsg}>Delete</Dropdown.Item>
-                            <Dropdown.Item onClick={updateMsg}>Update</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                     </div>

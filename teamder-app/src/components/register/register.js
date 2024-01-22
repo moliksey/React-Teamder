@@ -66,6 +66,7 @@ export default function Register () {
                 password: reg.password,
             }).then(res => {
                 if (res.data) {
+                    alert("Добро пожаловать, " + reg.username + "!")
                     navigate('/mainPage')
                 } else {
                     alert("There is already a user with this nickname")
