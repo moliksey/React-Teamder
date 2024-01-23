@@ -25,10 +25,10 @@ const Heading = styled(Typography)`
 const schema = yup.object().shape({
     username: yup
         .string()
-        .required('Enter your username'),
+        .required('Введите логин'),
     password: yup
         .string()
-        .required('Enter the password'),
+        .required('Введите пароль'),
 });
 
 
@@ -59,11 +59,7 @@ export default function Authentication() {
 
     const submitCheckIn = event => {
         event.preventDefault();
-        if (!auth.username) {
-            alert("You did not enter nickname")
-        } else if (!auth.password) {
-            alert("You did not enter password")
-        } else {
+        if(schema.isValidSync(auth)) {
             axios.post(DOMEN_SERVER + "/login", {
                 username: auth.username,
                 password: auth.password,
@@ -73,12 +69,12 @@ export default function Authentication() {
                     if (res.data.token)
                     {localStorage.setItem('token', res.data.token);
                     navigate('/mainPage');}
-                    else alert("There are no token")
+                    else alert("У вас нет токена")
                 } else {
-                    alert("You entered the wrong password or nickname")
+                    alert("Вы ввели неправильное имя пользователя или пароль")
                 }
             }).catch(() => {
-                alert("An error occurred on the server")
+                alert("Какая-то беда :(")
             })
         }
     }

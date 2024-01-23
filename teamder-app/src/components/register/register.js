@@ -54,7 +54,7 @@ export default function Register() {
 
         event.preventDefault();
         console.log(schema.isValid(reg))
-        if (schema.isValid(reg)) {
+        if (schema.isValidSync(reg)) {
             axios.post(DOMEN_SERVER + "/users", {
                 username: reg.username,
                 password: reg.password,
